@@ -6,9 +6,9 @@ from users.models import NULLABLE
 
 class Habits(models.Model):
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE)
     place = models.CharField(max_length=150, verbose_name='место исполнения привычки')
-    time = models.DateTimeField(verbose_name='дата и время выполнения привычки')
+    time = models.TimeField(verbose_name='время выполнения привычки')
     action = models.CharField(max_length=150, verbose_name='действие привычки')
     is_good_habit = models.BooleanField(verbose_name='признак приятной привычки', default=False, **NULLABLE)
     related_habit = models.ForeignKey('self', on_delete=models.SET_NULL, verbose_name='связанная привычка', **NULLABLE)
