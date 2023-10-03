@@ -1,3 +1,26 @@
-from django.shortcuts import render
+from rest_framework import viewsets, serializers
+from rest_framework.permissions import IsAuthenticated
 
-# Create your views here.
+from users.models import User
+from users.permissions import IsOwner
+from users.serializers import UserListSerializer, UserRetrieveSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+    default_serializer = UserListSerializer
+    serializers = {
+        'retrieve': UserRetrieveSerializer,
+        'update': UserRetrieveSerializer
+    }
+
+    def get_serializer_class(self):
+        return self.serializers.get(self.action, self.default_serializer)
+
+
+    def get_permissions(self):
+        if self.action in ['update', 'partial_update', 'retrieve']:
+            self.permission_classes = [IsAuthenticated, IsOwner]
+        return super().get_permissions()
+
