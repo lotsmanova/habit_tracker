@@ -1,7 +1,9 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from tracker.models import Habits
+from tracker.paginators import ListPaginator
 from tracker.serializers import HabitSerializer
+from users.permissions import IsOwner
 
 
 class HabitsCreateAPIView(generics.CreateAPIView):
@@ -17,21 +19,26 @@ class HabitsCreateAPIView(generics.CreateAPIView):
 class HabitsListAPIView(generics.ListAPIView):
     queryset = Habits.objects.all()
     serializer_class = HabitSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
+    pagination_class = ListPaginator
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+
 
 
 class HabitsRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Habits.objects.all()
     serializer_class = HabitSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
 
 
 class HabitsUpdateAPIView(generics.UpdateAPIView):
     queryset = Habits.objects.all()
     serializer_class = HabitSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
 
 
 class HabitsDestroyAPIView(generics.DestroyAPIView):
     queryset = Habits.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
