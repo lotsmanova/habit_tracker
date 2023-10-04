@@ -1,12 +1,9 @@
-import datetime
-from datetime import timedelta
-
 from rest_framework import serializers
 
 from tracker.models import Habits
 
-FREQUENCIES = ['ежедневно', 'раз в два дня', 'раз в три дня', 'раз в четыре дня',
-               'раз в пять дней', 'раз в шесть дней', 'раз в семь дней']
+FREQUENCIES = ['Ежедневно', 'Раз в два дня', 'Раз в три дня', 'Раз в четыре дня',
+               'Раз в пять дней', 'Раз в шесть дней', 'Раз в семь дней']
 
 class HabitSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,7 +28,7 @@ class HabitCreateSerializer(serializers.ModelSerializer):
                 'message_error': "Время выполнения должно быть не больше 120 секунд"
             })
 
-        elif data.get('frequency') not in FREQUENCIES:
+        elif data.get('frequency') and data.get('frequency') not in FREQUENCIES:
             raise serializers.ValidationError({
                 'message_error': "Нельзя выполнять привычку реже, чем 1 раз в 7 дней."
             })
