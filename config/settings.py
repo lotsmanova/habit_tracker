@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     'tracker.apps.TrackerConfig',
     'users.apps.UsersConfig',
+    'notification.apps.NotificationConfig',
 ]
 
 MIDDLEWARE = [
