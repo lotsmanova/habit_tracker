@@ -35,3 +35,4 @@ uritemplate
 wcwidth
 pillow
 requests
+django-cors-headers
