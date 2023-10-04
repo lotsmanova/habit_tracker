@@ -1,13 +1,13 @@
-from rest_framework import generics
+from rest_framework import generics, serializers
 from rest_framework.permissions import IsAuthenticated
 from tracker.models import Habits
 from tracker.paginators import ListPaginator
-from tracker.serializers import HabitSerializer
+from tracker.serializers import HabitSerializer, HabitCreateSerializer
 from users.permissions import IsOwner
 
 
 class HabitsCreateAPIView(generics.CreateAPIView):
-    serializer_class = HabitSerializer
+    serializer_class = HabitCreateSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
