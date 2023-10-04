@@ -34,3 +34,4 @@ tzdata
 uritemplate
 wcwidth
 pillow
+requests
