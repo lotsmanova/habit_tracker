@@ -42,3 +42,11 @@ class HabitsUpdateAPIView(generics.UpdateAPIView):
 class HabitsDestroyAPIView(generics.DestroyAPIView):
     queryset = Habits.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
+
+
+class HabitListPublicAPIView(generics.ListAPIView):
+    queryset = Habits.objects.filter(is_public=True)
+    serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated]
+    pagination_class = ListPaginator
+

@@ -5,6 +5,8 @@ from rest_framework import serializers
 
 from tracker.models import Habits
 
+FREQUENCIES = ['ежедневно', 'раз в два дня', 'раз в три дня', 'раз в четыре дня',
+               'раз в пять дней', 'раз в шесть дней', 'раз в семь дней']
 
 class HabitSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,7 +31,7 @@ class HabitCreateSerializer(serializers.ModelSerializer):
                 'message_error': "Время выполнения должно быть не больше 120 секунд"
             })
 
-        elif data.get('frequency') in ['неделя', 'месяц'] or int(data.get('frequency')) > 7:
+        elif data.get('frequency') not in FREQUENCIES:
             raise serializers.ValidationError({
                 'message_error': "Нельзя выполнять привычку реже, чем 1 раз в 7 дней."
             })
@@ -45,11 +47,5 @@ class HabitCreateSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError({
                     'message_error': "Нельзя выбрать 'Связанную привычку' и 'Вознаграждение' для приятной привычки."
                 })
-
-
-
-
-
-
 
         return data
