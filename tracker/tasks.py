@@ -1,9 +1,7 @@
 from datetime import timedelta
-
 import requests
 from django.conf import settings
 from django.utils import timezone
-
 from tracker.models import Habits
 
 
@@ -19,4 +17,3 @@ def send_notification_tg(*args, **kwargs):
                 "text": f'В {habit.time} вы хотели начать {habit.action} в {habit.place}'
             }
         )
-

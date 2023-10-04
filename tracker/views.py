@@ -1,4 +1,4 @@
-from rest_framework import generics, serializers
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from tracker.models import Habits
 from tracker.paginators import ListPaginator
@@ -26,7 +26,6 @@ class HabitsListAPIView(generics.ListAPIView):
         return super().get_queryset().filter(user=self.request.user)
 
 
-
 class HabitsRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Habits.objects.all()
     serializer_class = HabitSerializer
@@ -49,4 +48,3 @@ class HabitListPublicAPIView(generics.ListAPIView):
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = ListPaginator
-

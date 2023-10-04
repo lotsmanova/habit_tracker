@@ -1,9 +1,9 @@
 from rest_framework import serializers
-
 from tracker.models import Habits
 
 FREQUENCIES = ['Ежедневно', 'Раз в два дня', 'Раз в три дня', 'Раз в четыре дня',
                'Раз в пять дней', 'Раз в шесть дней', 'Раз в семь дней']
+
 
 class HabitSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,7 +20,8 @@ class HabitCreateSerializer(serializers.ModelSerializer):
 
         if data.get('related_habit') and data.get('award'):
             raise serializers.ValidationError({
-                'message_error': "Нельзя одновременно выбрать 'Связанную привычку' и 'Вознаграждение'. Выберите что-то одно."
+                'message_error': "Нельзя одновременно выбрать 'Связанную привычку' "
+                                 "и 'Вознаграждение'. Выберите что-то одно."
             })
 
         elif data.get('time_to_complete').minute >= 2:
@@ -36,7 +37,8 @@ class HabitCreateSerializer(serializers.ModelSerializer):
         elif data.get('related_habit'):
             if not data.get('related_habit').is_good_habit:
                 raise serializers.ValidationError({
-                    'message_error': "В связанные привычки могут попадать только привычки с признаком приятной привычки."
+                    'message_error': "В связанные привычки могут попадать только привычки "
+                                     "с признаком приятной привычки."
                 })
 
         elif data.get('is_good_habit'):
@@ -44,5 +46,4 @@ class HabitCreateSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError({
                     'message_error': "Нельзя выбрать 'Связанную привычку' и 'Вознаграждение' для приятной привычки."
                 })
-
         return data

@@ -1,11 +1,9 @@
 from django.conf import settings
 from django.db import models
-
 from users.models import NULLABLE
 
 
 class Habits(models.Model):
-
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE)
     place = models.CharField(max_length=150, verbose_name='место исполнения привычки')
     time = models.TimeField(verbose_name='время выполнения привычки')
@@ -17,10 +15,8 @@ class Habits(models.Model):
     time_to_complete = models.TimeField(verbose_name='время на выполнение')
     is_public = models.BooleanField(verbose_name='признак публизности', default=False)
 
-
     def __str__(self):
         return f'{self.action} - {self.time} - {self.place}'
-
 
     class Meta:
         verbose_name = 'привычка'

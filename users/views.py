@@ -1,4 +1,4 @@
-from rest_framework import viewsets, serializers
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from users.models import User
@@ -19,9 +19,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.default_serializer)
 
-
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'retrieve']:
             self.permission_classes = [IsAuthenticated, IsOwner]
         return super().get_permissions()
-
