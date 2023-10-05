@@ -20,9 +20,3 @@ class UserCreateSerializers(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-    def validate(self, data):
-
-        if data['chat_id'][:1] != '@':
-            raise serializers.ValidationError({
-                'message_error': "Никнейм пользователя должен начинаться с '@'"
-            })

@@ -24,6 +24,7 @@ class Habits(models.Model):
     award = models.CharField(max_length=200, verbose_name='вознаграждение', **NULLABLE)
     time_to_complete = models.TimeField(verbose_name='время на выполнение')
     is_public = models.BooleanField(verbose_name='признак публизности', default=False)
+    time_last_send = models.DateTimeField(verbose_name='последняя отпрвка уведомления', **NULLABLE)
 
     def __str__(self):
         return f'{self.action} - {self.time} - {self.place}'
