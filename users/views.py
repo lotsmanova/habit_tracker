@@ -3,17 +3,18 @@ from rest_framework.permissions import IsAuthenticated
 
 from users.models import User
 from users.permissions import IsOwner
-from users.serializers import UserListSerializer, UserRetrieveSerializer, UserCreateSerializers
+from users.serializers import UserListSerializer, UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    """CRUD для пользователя"""
     queryset = User.objects.all()
     permission_classes = [IsAuthenticated]
     default_serializer = UserListSerializer
     serializers = {
-        'create': UserCreateSerializers,
-        'retrieve': UserRetrieveSerializer,
-        'update': UserRetrieveSerializer
+        'create': UserSerializer,
+        'retrieve': UserSerializer,
+        'update': UserSerializer
     }
 
     def get_serializer_class(self):

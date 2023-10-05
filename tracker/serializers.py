@@ -6,12 +6,14 @@ FREQUENCIES = ['Ежедневно', 'Раз в два дня', 'Раз в тр�
 
 
 class HabitSerializer(serializers.ModelSerializer):
+    """Сериализатор привычки"""
     class Meta:
         model = Habits
         fields = '__all__'
 
 
 class HabitCreateSerializer(serializers.ModelSerializer):
+    """Сериализатор для создания привычки"""
     class Meta:
         model = Habits
         fields = '__all__'

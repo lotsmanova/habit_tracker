@@ -1,9 +1,7 @@
 from datetime import timedelta, datetime
 import requests
 from django.conf import settings
-from django.utils import timezone
 from rest_framework.response import Response
-
 from tracker.models import Habits
 
 

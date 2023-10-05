@@ -9,14 +9,8 @@ class UserListSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'phone', 'chat_id']
 
 
-class UserRetrieveSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
+    """Сериализатор пользователя"""
     class Meta:
         model = User
         fields = '__all__'
-
-
-class UserCreateSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
-
