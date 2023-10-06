@@ -13,8 +13,8 @@ class UserViewSet(viewsets.ModelViewSet):
     default_serializer = UserListSerializer
     serializers = {
         'create': UserSerializer,
-        'retrieve': UserSerializer,
-        'update': UserSerializer
+        'retrieve': UserListSerializer,
+        'update': UserListSerializer
     }
 
     def get_serializer_class(self):

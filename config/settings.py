@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'tracker.apps.TrackerConfig',
     'users.apps.UsersConfig',
     'notification.apps.NotificationConfig',
+    'base.apps.BaseConfig',
 ]
 
 MIDDLEWARE = [
@@ -152,6 +153,7 @@ REST_FRAMEWORK = {
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_TIMEZONE = 'Europe/Moscow'
 
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
