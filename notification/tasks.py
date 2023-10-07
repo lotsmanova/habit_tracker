@@ -30,4 +30,8 @@ def send_notification_tg(*args, **kwargs):
                         "text": f'В {habit.time} вы хотели начать {habit.action} в {habit.place}'
                     }
                 )
+
+                habit.time_last_send = now
+                habit.save()
+
                 return Response(response.status_code)
