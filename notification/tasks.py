@@ -13,7 +13,8 @@ def send_notification_tg(*args, **kwargs):
     for habit in habits:
         habit_time = datetime.combine(datetime.today(), habit.time)
 
-        if ((habit.frequency == 'one daily' and (now - habit.time_last_send) > timedelta(days=1))
+        if habit.time_last_send is None or (
+                (habit.frequency == 'one daily' and (now - habit.time_last_send) > timedelta(days=1))
                 or ((habit.frequency == 'two daily' and (now - habit.time_last_send) > timedelta(days=2))
                     or (habit.frequency == 'three daily' and (now - habit.time_last_send) > timedelta(days=3)))
                 or (habit.frequency == 'four daily' and (now - habit.time_last_send) > timedelta(days=4))
@@ -22,7 +23,6 @@ def send_notification_tg(*args, **kwargs):
                 or (habit.frequency == 'seven daily' and (now - habit.time_last_send) > timedelta(days=7))):
 
             if now - timedelta(minutes=30) < habit_time < now + timedelta(minutes=30):
-
                 response = requests.post(
                     send_url,
                     json={
